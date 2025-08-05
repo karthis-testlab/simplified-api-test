@@ -1,18 +1,18 @@
 package com.simplified.api.test.base;
 
 import java.io.File;
+import java.util.Map;
 
 import com.simplified.api.test.design.ApiClient;
 import com.simplified.api.test.design.ResponseAPI;
 
 import io.restassured.RestAssured;
-
 import io.restassured.specification.RequestSpecification;
 
 public class RestAssuredBaseImpl implements ApiClient {
 
 	private RequestSpecification given(RequestSpecification request) {
-		return RestAssured.given().spec(request);
+		return RestAssured.given().spec(request).log().all();
 	}
 
 	public ResponseAPI get(RequestSpecification request, String endpoint) {
@@ -27,6 +27,10 @@ public class RestAssuredBaseImpl implements ApiClient {
 		} else {
 			return new RestAssuredResponseImpl(given(request).body(payload).post(endpoint));
 		}
+	}
+
+	public ResponseAPI post(RequestSpecification request, Map<String, String> formParams) {
+		return new RestAssuredResponseImpl(given(request).formParams(formParams).post());
 	}
 
 	public ResponseAPI put(RequestSpecification request, String endpoint, Object payload) {
