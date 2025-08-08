@@ -11,24 +11,35 @@ import io.restassured.path.json.JsonPath;
 public class IncidentService extends ServiceNowBase {
 
 	private static final String TABLE_NAME = "/incident";
+	
+	public IncidentService() {
+		requestBuilder = commonSpec().setBasePath("/api/now/table");
+	}
 
 	public IncidentService fetchIncidentRecords() {
-		response = restAssured.get(commonSpec(), TABLE_NAME);
+		response = restAssured.get(requestBuilder.build(), TABLE_NAME);
 		return this;
 	}
 	
 	public IncidentService fetchIncidentRecord(String sys_id) {
-		response = restAssured.get(commonSpec(), TABLE_NAME+"/"+sys_id);
+		response = restAssured.get(requestBuilder.build(), TABLE_NAME+"/"+sys_id);
 		return this;
 	}
 	
 	public IncidentService fetchRecordsByCategory(String category) {		
-		response = restAssured.get(commonSpec().queryParam("sysparm_query", "category="+category), TABLE_NAME);
+		response = restAssured.get(requestBuilder
+				                   .addQueryParam("sysparm_query", "category="+category)
+				                   .build()
+				                   , TABLE_NAME);
 		return this;
 	}
 	
 	public IncidentService createRecord(String payload) {
-		response = restAssured.post(commonSpec().contentType(ContentType.JSON), TABLE_NAME, payload);
+		response = restAssured.post(requestBuilder
+				                     .setContentType(ContentType.JSON)
+				                     .build(), 
+				                     TABLE_NAME, 
+				                     payload);
 		return this;
 	}
 
