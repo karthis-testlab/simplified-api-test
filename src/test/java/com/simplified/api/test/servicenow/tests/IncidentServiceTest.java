@@ -3,6 +3,7 @@ package com.simplified.api.test.servicenow.tests;
 import org.testng.annotations.Test;
 
 import com.simplified.api.test.servicenow.som.IncidentService;
+import com.simplified.api.test.servicenow.som.OAuthService;
 
 public class IncidentServiceTest {
 	
@@ -35,6 +36,16 @@ public class IncidentServiceTest {
 		
 		System.out.println(sysId);
 		
+	}	
+	
+	@Test
+	public void extractOAuthToken() {
+		String token = new OAuthService()
+				           .generateToken()
+				           .validateJsonResponse(200, "OK")
+				           .extractToken("access_token");
+		
+		System.out.println(token);
 	}
 
 }
