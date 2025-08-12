@@ -5,6 +5,7 @@ import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
@@ -13,7 +14,9 @@ public class IncidentService extends ServiceNowBase {
 	private static final String TABLE_NAME = "/incident";
 	
 	public IncidentService() {
-		requestBuilder = commonSpec().setBasePath("/api/now/table");
+		requestBuilder = commonSpec()
+				         .setBasePath("/api/now/table")							
+						 .setAuth(RestAssured.basic("admin", "dLS9Qgs=V!0n"));
 	}
 
 	public IncidentService fetchIncidentRecords() {
