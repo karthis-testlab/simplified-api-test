@@ -3,7 +3,6 @@ package com.simplified.api.test.servicenow.som;
 import com.simplified.api.test.base.RestAssuredBaseImpl;
 import com.simplified.api.test.design.ResponseAPI;
 
-import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 
 public class ServiceNowBase {
@@ -14,8 +13,7 @@ public class ServiceNowBase {
 	
 	public RequestSpecBuilder commonSpec() {
 		return new RequestSpecBuilder()
-				.setBaseUri("https://dev271917.service-now.com")				
-				.setAuth(RestAssured.basic("admin", "ay*lPG$Va97D"));
+				.setBaseUri("https://dev214352.service-now.com");
 	}
 
 }
