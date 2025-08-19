@@ -10,17 +10,13 @@ import org.json.JSONObject;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
-public class OAuthService extends ServiceNowBase {
-	
-	public OAuthService() {
-		requestBuilder = commonSpec().setBasePath("/oauth_token.do");
-	}
-	
+public class OAuthService extends ServiceNowBase {	
+		
 	public OAuthService generateToken() {
 		Map<String, String> forms = new HashMap<String, String>();
 		forms.put("grant_type", "password");
-		forms.put("client_id", "ae91a5e138d322103203abcc4d110258");
-		forms.put("client_secret", "MPys?&7~O(");
+		forms.put("client_id", "460c881c292f221046d06cb2211a1711");
+		forms.put("client_secret", "bkXuUDG?K3");
 		forms.put("username", "admin");
 		forms.put("password", "dLS9Qgs=V!0n");
 		response = restAssured.post(requestBuilder.setContentType(ContentType.URLENC).build(), forms);
@@ -42,6 +38,16 @@ public class OAuthService extends ServiceNowBase {
 	public String extractToken() {
 		JSONObject json = new JSONObject(response.getBody());
 		return json.getString("access_token");
+	}
+	
+	public OAuthService setBaseUri(String baseUri) {
+		super.baseUri(baseUri);
+		return this;
+	}	
+	
+	public OAuthService setBasePath(String basePath) {
+		super.basePath(basePath);
+		return this;		
 	}
 
 }

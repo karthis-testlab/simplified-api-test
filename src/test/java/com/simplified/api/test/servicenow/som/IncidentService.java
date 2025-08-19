@@ -5,19 +5,12 @@ import java.util.List;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
 public class IncidentService extends ServiceNowBase {
 
-	private static final String TABLE_NAME = "/incident";
-	
-	public IncidentService() {
-		requestBuilder = commonSpec()
-				         .setBasePath("/api/now/table")							
-						 .setAuth(RestAssured.basic("admin", "dLS9Qgs=V!0n"));
-	}
+	private static final String TABLE_NAME = "/incident";	
 
 	public IncidentService fetchIncidentRecords() {
 		response = restAssured.get(requestBuilder.build(), TABLE_NAME);
@@ -29,20 +22,13 @@ public class IncidentService extends ServiceNowBase {
 		return this;
 	}
 	
-	public IncidentService fetchRecordsByCategory(String category) {		
-		response = restAssured.get(requestBuilder
-				                   .addQueryParam("sysparm_query", "category="+category)
-				                   .build()
-				                   , TABLE_NAME);
+	public IncidentService fetchRecordsByCategory() {
+		response = restAssured.get(requestBuilder.build(), TABLE_NAME);
 		return this;
 	}
 	
-	public IncidentService createRecord(String payload) {
-		response = restAssured.post(requestBuilder
-				                     .setContentType(ContentType.JSON)
-				                     .build(), 
-				                     TABLE_NAME, 
-				                     payload);
+	public IncidentService createRecord(String payload) {		
+		response = restAssured.post(requestBuilder.build(), TABLE_NAME, payload);
 		return this;
 	}
 
@@ -51,7 +37,7 @@ public class IncidentService extends ServiceNowBase {
 		MatcherAssert.assertThat(response.getStatusMessage(), Matchers.equalTo(statusMessage));
 		MatcherAssert.assertThat(response.getContentType(), Matchers.equalTo("application/json"));
 		return this;
-	}
+	}	
 
 	public IncidentService validateXmlResponse(int statusCode, String statusMessage) {
 		MatcherAssert.assertThat(response.getStatusCode(), Matchers.equalTo(statusCode));
@@ -71,6 +57,32 @@ public class IncidentService extends ServiceNowBase {
 		for (String category : categories) {
 			MatcherAssert.assertThat(category, Matchers.equalToIgnoringCase(expected));
 		}
+	}
+	
+	public IncidentService setBaseUri(String baseUri) {
+		super.baseUri(baseUri);
+		return this;
+	}	
+	
+	public IncidentService setBasePath(String basePath) {
+		super.basePath(basePath);
+		return this;		
+	}
+	
+	public IncidentService setBasicAuth(String username, String password) {
+		super.basicAuth(username, password);
+		return this;
+	}
+	
+	
+	public IncidentService setContentType(ContentType contentType) {
+		super.contentType(contentType);
+		return this;
+	}
+	
+	public IncidentService setQueryParam(String key, String value) {
+		super.queryParam(key, value);
+		return this;
 	}
 
 }
