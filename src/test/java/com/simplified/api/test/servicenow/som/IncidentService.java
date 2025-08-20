@@ -17,6 +17,11 @@ public class IncidentService extends ServiceNowBase {
 		return this;
 	}
 	
+	public IncidentService fetchIncidentRecords(String tableName) {
+		response = restAssured.get(requestBuilder.build(), tableName);
+		return this;
+	}
+	
 	public IncidentService fetchIncidentRecord(String sys_id) {
 		response = restAssured.get(requestBuilder.build(), TABLE_NAME+"/"+sys_id);
 		return this;
