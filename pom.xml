@@ -6,6 +6,12 @@
   
 	<properties>
 		<rest-assured-version>5.5.5</rest-assured-version>
+		<testng-version>7.6.0</testng-version>
+		<jackson-databind-version>2.19.2</jackson-databind-version>
+		<org-json-version>20250517</org-json-version>
+		<cucumber-java-version>7.27.2</cucumber-java-version>
+		<cucumber-testng-version>7.27.2</cucumber-testng-version>
+		<cucumber-picocontainer-version>7.27.2</cucumber-picocontainer-version>
 	</properties>
 	
 	<dependencies>
@@ -17,27 +23,32 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>7.6.0</version>
+			<version>${testng-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.19.2</version>
+			<version>${jackson-databind-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
-			<version>20250517</version>
+			<version>${org-json-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>7.27.2</version>
+			<version>${cucumber-java-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-testng</artifactId>
-			<version>7.27.1</version>
+			<version>${cucumber-testng-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>${cucumber-picocontainer-version}</version>
 		</dependency>
 	</dependencies>
   
