@@ -11,6 +11,10 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
 public class OAuthService extends ServiceNowBase {	
+	
+	public OAuthService() {
+		basePath("/oauth_token.do");
+	}
 		
 	public OAuthService generateToken() {
 		Map<String, String> forms = new HashMap<String, String>();

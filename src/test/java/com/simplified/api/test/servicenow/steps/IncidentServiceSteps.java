@@ -9,6 +9,11 @@ import io.cucumber.java.en.When;
 public class IncidentServiceSteps {
 	
 	IncidentService incidentService = new IncidentService();
+    private TestContext context;
+	
+	public IncidentServiceSteps(TestContext context) {
+		this.context = context;
+	}
 
 	@Given("user should set the base uri as {string} in the api client")
 	public void user_should_set_the_base_uri_as_in_the_api_client(String baseUri) {
@@ -33,6 +38,11 @@ public class IncidentServiceSteps {
 	@Then("user should able to see the success response and with relevant status code and message")
 	public void user_should_able_to_see_the_success_response_and_with_relevant_status_code_and_message() {
 		incidentService.validateJsonResponse(200, "OK");
+	}
+	
+	@Given("user should set the OAuth token to access the service now table apis")
+	public void user_should_set_the_o_auth_token_to_access_the_service_now_table_apis() {
+	   incidentService.header("Authorization", "Bearer "+context.getContext("access_token"));
 	}
 
 }

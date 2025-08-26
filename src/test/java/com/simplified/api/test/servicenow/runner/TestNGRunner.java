@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-		          features = {"src/test/java/com/simplified/api/test/servicenow/features/incident.feature"},
+		          features = {"src/test/java/com/simplified/api/test/servicenow/features/incident.feature:10"},
 		          glue = {"com.simplified.api.test.servicenow.steps"},
 		          dryRun = false,
 		          plugin = {

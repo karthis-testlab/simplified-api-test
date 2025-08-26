@@ -37,5 +37,10 @@ public class ServiceNowBase {
 		return requestBuilder
 				.addQueryParam(key, value);
 	}
+	
+	public RequestSpecBuilder header(String key, String value) {
+		return requestBuilder
+				.addHeader(key, value);
+	}
 
 }
